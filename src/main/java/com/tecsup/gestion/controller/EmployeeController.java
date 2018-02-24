@@ -27,7 +27,6 @@ import com.tecsup.gestion.services.EmployeeService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/admin")
 public class EmployeeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
@@ -43,13 +42,13 @@ public class EmployeeController {
 	@Autowired
 	private ApplicationContext context;
 
-	@GetMapping("/menu")
+	@GetMapping("/user/menu")
 	public ModelAndView menu() {
 
-		return new ModelAndView("/menu");
+		return new ModelAndView("/user/menu");
 	}
 
-	@GetMapping("/emp/list")
+	@GetMapping("/admin/emp/list")
 	public ModelAndView list(@ModelAttribute("employee") Employee employee, ModelMap model) {
 
 		model.addAttribute("employeeMngShow", "show");
@@ -69,7 +68,7 @@ public class EmployeeController {
 	// CREATION //
 	//////////////////////////////////////////////////////////////////////////////////////
 
-	@GetMapping("/emp/createform")
+	@GetMapping("/admin/emp/createform")
 	public ModelAndView createform(ModelMap model) {
 
 		model.addAttribute("employeeMngShow", "show");
@@ -83,7 +82,7 @@ public class EmployeeController {
 
 	}
 
-	@PostMapping("/emp/create")
+	@PostMapping("/admin/emp/create")
 	public ModelAndView create(@ModelAttribute("employee") @Valid Employee emp, BindingResult result, ModelMap model) {
 
 		// String msg = context.getMessage("employee.salary.min", null, Locale.US);
@@ -129,7 +128,7 @@ public class EmployeeController {
 	// SHOW EDIT FORM OR DELETE FORM//
 	//////////////////////////////////////////////////////////////////////////////////////
 
-	@GetMapping("/emp/{action}/{employee_id}")
+	@GetMapping("/admin/emp/{action}/{employee_id}")
 	public ModelAndView form(@PathVariable String action, @PathVariable int employee_id, ModelMap model) {
 
 		logger.info("action = " + action);
@@ -156,7 +155,7 @@ public class EmployeeController {
 	// UPDATE //
 	//////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/emp/update")
+	@PostMapping("/admin/emp/update")
 	public ModelAndView update(@ModelAttribute("employee") @Valid Employee emp, BindingResult result, ModelMap model) {
 
 		logger.info("emp = " + emp);
@@ -194,7 +193,7 @@ public class EmployeeController {
 	// DELETE //
 	//////////////////////////////////////////////////////////////////////////////////////
 
-	@PostMapping("/emp/delete")
+	@PostMapping("/admin/emp/delete")
 	public ModelAndView delete(@ModelAttribute("employee") Employee emp,  ModelMap model) {
 
 		logger.info("emp = " + emp);

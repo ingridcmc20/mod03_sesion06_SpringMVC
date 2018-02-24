@@ -56,7 +56,7 @@ public class LoginController {
 			try {
 				Employee emp = securityService.validate(credential.getLogin(), credential.getPassword());
 				logger.info("--" + emp.toString());
-				modelAndView = new ModelAndView("/admin/menu");
+				modelAndView = new ModelAndView("/user/menu");
 			} catch (LoginException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
