@@ -1,4 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,10 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form:form method="post" servletRelativeAction="/login" modelAttribute="credential">
+      
+      	<spring:url value="/login " var="loginURL"/>
+      
+        <form:form method="post" action="${loginURL}" modelAttribute="credential">
           <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
             <form:input path="login" class="form-control"  id="exampleInputEmail1" type="text" aria-describedby="emailHelp" placeholder="Enter username"/>
