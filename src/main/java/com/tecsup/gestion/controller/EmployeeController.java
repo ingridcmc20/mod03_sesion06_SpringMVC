@@ -1,22 +1,20 @@
 package com.tecsup.gestion.controller;
 
-import java.util.Locale;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tecsup.gestion.exception.DAOException;
@@ -42,9 +40,18 @@ public class EmployeeController {
 	@Autowired
 	private ApplicationContext context;
 
+	@GetMapping("/user/403")
+	public ModelAndView accessDenied() {
+		return new ModelAndView("/user/403");
+	}
+	
 	@GetMapping("/user/menu")
 	public ModelAndView menu() {
-
+		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	      String name = auth.getName(); //get logged in username 
+//	      logger.info("Name : " + name);
+		
 		return new ModelAndView("/user/menu");
 	}
 
@@ -106,7 +113,7 @@ public class EmployeeController {
 			if (emp.getPassword().equals(emp.getRepassword()))
 				try {
 					employeeService.create(emp);
-					logger.info("new Employee login = " + emp.getLogin());
+					logger.info("new Employee login = " + emp.getUsername());
 					modelAndView = new ModelAndView("redirect:/admin/emp/list");
 
 				} catch (DAOException e) {

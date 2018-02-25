@@ -30,11 +30,12 @@ public class LoginController {
 	@Autowired
 	private SecurityService securityService;
 
-	@GetMapping("/")
+	@GetMapping({"/","/login" })
 	public ModelAndView preLogin() {
 		Credential credential = new Credential();
 		return new ModelAndView("login", "credential", credential);
 	}
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -54,7 +55,7 @@ public class LoginController {
 		} else {
 			
 			try {
-				Employee emp = securityService.validate(credential.getLogin(), credential.getPassword());
+				Employee emp = securityService.validate(credential.getUsername(), credential.getPassword());
 				logger.info("--" + emp.toString());
 				modelAndView = new ModelAndView("/user/menu");
 			} catch (LoginException e) {

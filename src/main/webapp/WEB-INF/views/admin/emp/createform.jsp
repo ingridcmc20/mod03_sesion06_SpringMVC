@@ -31,8 +31,8 @@
 				      </div>
 		              <div class="col-md-6">
 		                <label for="login">Username</label>
-		                <form:input path="login" class="form-control" type="text"  placeholder="Enter username"/>
-						<form:errors path="login" cssClass="error" />
+		                <form:input path="username" class="form-control" type="text"  placeholder="Enter username"/>
+						<form:errors path="username" cssClass="error" />
 				      </div>
 		            </div>
 		          </div>

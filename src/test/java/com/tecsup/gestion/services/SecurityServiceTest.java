@@ -1,6 +1,6 @@
 package com.tecsup.gestion.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,6 +13,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.tecsup.gestion.exception.DAOException;
 import com.tecsup.gestion.exception.LoginException;
+import com.tecsup.gestion.model.Employee;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextHierarchy({ @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml"),
@@ -23,12 +25,24 @@ public class SecurityServiceTest {
 	@Autowired
 	private SecurityService securityService;
 
-	@Test
-	public void testValidate() throws LoginException, DAOException {
 
-		//
-		Assert.assertNotNull(securityService.validate("jgomez", "123456"));
+	@Test
+	public void testValidate() {
+
+		try {
+			//
+			Assert.assertNotNull(
+					securityService.validate("jgomez", "123456"));
+			
+		} catch (LoginException e) {
+			fail(e.getMessage());
+		} catch (DAOException e) {
+			fail(e.getMessage());
+		}
 
 	}
 
+
+	
+	
 }

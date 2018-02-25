@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 public class Credential {
 
 	@NotEmpty
-	String login;
+	String username;
 
 	@NotEmpty
 	String password;
@@ -14,19 +14,19 @@ public class Credential {
 
 	}
 
-	public Credential(String login, String password) {
+	public Credential(String username, String password) {
 		super();
-		this.login = login;
+		this.username = username;
 		this.password = password;
 	}
 
 	
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

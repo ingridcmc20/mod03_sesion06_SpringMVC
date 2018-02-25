@@ -52,7 +52,7 @@
 	          	<c:forEach items="${employees}" var="emp"> 
 	            	<tr>
 	                  <td>${emp.employeeId}</td>
-	                  <td>${emp.login}</td>
+	                  <td>${emp.username}</td>
 	                  <td>${emp.firstname}</td>
 	                  <td>${emp.lastname}</td>
 	                  <td>${emp.salary}</td>

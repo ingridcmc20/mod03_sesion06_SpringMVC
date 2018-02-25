@@ -105,7 +105,7 @@ public class Employee extends Credential {
 
 	@Override
 	public String toString() {
-		return "Employee [login=" + login + ", password=" + password + ", repassword=" + repassword + ", employeeId=" + employeeId + ", firstname="
+		return "Employee [login=" + username + ", password=" + password + ", repassword=" + repassword + ", employeeId=" + employeeId + ", firstname="
 				+ firstname + ", lastname=" + lastname + ", email=" + email + ", salary=" + salary + "]";
 	}
 

@@ -29,23 +29,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public Employee validate(String login, String clave) throws LoginException, DAOException {
 		// TODO Auto-generated method stub
 
-		logger.info("validate(): login: " + login + ", clave: " + clave);
-
-		if ("".equals(login) && "".equals(clave)) {
-			throw new LoginException("Login and password incorrect");
-		}
-
 		String query = "SELECT login, password, employee_id, first_name, last_name, salary, department_id  "
 				+ " FROM EMPLOYEES WHERE login=? AND password=?";
-
+	
 		Object[] params = new Object[] { login, clave };
-
+		
 		try {
-
-			Employee emp = (Employee) jdbcTemplate.queryForObject(query, params, new EmployeeMapper());
+	
+			Employee emp = 
+					(Employee) jdbcTemplate.
+						queryForObject(query, params, new EmployeeMapper());
 			//
 			return emp;
-
+	
 		} catch (EmptyResultDataAccessException e) {
 			logger.info("Employee y/o clave incorrecto");
 			throw new LoginException();
@@ -53,6 +49,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			logger.info("Error: " + e.getMessage());
 			throw new DAOException(e.getMessage());
 		}
+
+		
 	}
 
 	@Override
@@ -79,7 +77,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		String query = "INSERT INTO EMPLOYEES (login, password, first_name, last_name, salary, department_id)  VALUES ( ?,?,?,?,?,? )";
 
-		Object[] params = new Object[] { emp.getLogin(), emp.getPassword(), emp.getLastname(), emp.getFirstname(), emp.getSalary(), emp.getDepartmentId() };
+		Object[] params = new Object[] { emp.getUsername(), emp.getPassword(), emp.getLastname(), emp.getFirstname(), emp.getSalary(), emp.getDepartmentId() };
 
 		
 		try {
@@ -152,7 +150,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Employee emp = new Employee();
 			emp.setEmployeeId(rs.getInt("employee_id"));
-			emp.setLogin(rs.getString("login"));
+			emp.setUsername(rs.getString("login"));
 			emp.setPassword(rs.getString("password"));
 			emp.setFirstname(rs.getString("first_name"));
 			emp.setLastname(rs.getString("last_name"));

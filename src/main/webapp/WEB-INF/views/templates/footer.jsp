@@ -25,8 +25,13 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <spring:url value="/j_spring_security_logout" var="logoutURL"/>
+            <form class="form-inline" action="${logoutURL}" method="post">
+				<input type="submit" value="Logout"  class="btn btn-primary"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form>
           </div>
+          
         </div>
       </div>
     </div>
