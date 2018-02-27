@@ -33,7 +33,8 @@
     
 	<jsp:include page="../templates/footer.jsp"/>
 
-  </div>
+  	</div>
+  </div>  
 </body>
 
 </html>
