@@ -1,35 +1,52 @@
 package com.tecsup.gestion.ws.soap;
 
-import java.io.StringReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import javax.jws.WebService;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+import com.tecsup.gestion.exception.DAOException;
+import com.tecsup.gestion.exception.EmptyResultException;
+import com.tecsup.gestion.model.Employee;
+import com.tecsup.gestion.services.EmployeeService;
+import com.tecsup.gestion.ws.employeeschema.EmployeeXSD;
+import com.tecsup.gestion.ws.employeeschema.GetEmployeeRequest;
+import com.tecsup.gestion.ws.employeeschema.GetEmployeeResponse;
 
-import org.springframework.ws.client.core.WebServiceTemplate;
-
-@WebService
+@Endpoint
 public class EmployeeSoapWS {
+	private static final String NAMESPACE_URI = "http://ws.gestion.tecsup.com/EmployeeSchema";
+  
+	@Autowired
+	private EmployeeService employeeService;
 
-	private static final String MESSAGE = "<message xmlns=\"http://tempuri.org\">Hello World</message>";
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeRequest")
+	@ResponsePayload
+	public GetEmployeeResponse getEmployee(@RequestPayload GetEmployeeRequest request) {
+		GetEmployeeResponse response = new GetEmployeeResponse();
 
-	private final WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
+		Employee emp = null;
+		try {
+			emp = employeeService.find(request.getEmployeeId());
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EmptyResultException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		EmployeeXSD empXSD = new EmployeeXSD();
+ 
+		empXSD.setEmployeeId(emp.getEmployeeId());
+		empXSD.setFirstname(emp.getFirstname());
+		empXSD.setLastname(emp.getLastname());
 
-	public void setDefaultUri(String defaultUri) {
-		webServiceTemplate.setDefaultUri(defaultUri);
+		response.setEmployeeXSD(empXSD);
+
+		return response;
 	}
 
-	// send to the configured default URI
-	public void simpleSendAndReceive() {
-		StreamSource source = new StreamSource(new StringReader(MESSAGE));
-		StreamResult result = new StreamResult(System.out);
-		webServiceTemplate.sendSourceAndReceiveToResult(source, result);
-	}
-
-	// send to an explicit URI
-	public void customSendAndReceive() {
-		StreamSource source = new StreamSource(new StringReader(MESSAGE));
-		StreamResult result = new StreamResult(System.out);
-		webServiceTemplate.sendSourceAndReceiveToResult("http://localhost:8080/AnotherWebService", source, result);
-	}
+	
 }

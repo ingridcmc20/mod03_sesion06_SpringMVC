@@ -24,8 +24,8 @@
    <!-- Get roles -->
    <jdbc-user-service id="userService" 
 	data-source-ref="dataSource"
-	authorities-by-username-query="select b.login, a.rol_name  from employees_roles a, employees b  where a.employee_id = b.employee_id and b.login =? "
-	users-by-username-query="select login, password, 'true' from employees where login=?"/>		
+	authorities-by-username-query="select b.login, a.rol_name  from EMPLOYEES_ROLES a, EMPLOYEES b  where a.employee_id = b.employee_id and b.login =? "
+	users-by-username-query="select login, password, 'true' from EMPLOYEES where login=?"/>		
 
    <!-- Authentication Manager -->
    <authentication-manager>

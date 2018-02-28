@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/EmployeeSchema" xmlns:tns="http://www.example.org/EmployeeSchema" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://ws.gestion.tecsup.com/EmployeeSchema"
+	xmlns:tns="http://ws.gestion.tecsup.com/EmployeeSchema" 
+	
+	elementFormDefault="qualified">
 
-    <element name="employeeId" type="string"></element>
+    <element name="getEmployeeRequest">
+    	<complexType>
+    		<sequence>
+    			<element name="employeeId" type="int" />
+    		</sequence>
+    	</complexType>
+    </element>
 
-    <element name="firstname" type="string"></element>
+	<element name="getEmployeeResponse">
+    	<complexType>
+    		<sequence>
+    			<element name="employeeXSD" type="tns:EmployeeXSD" />
+    		</sequence>
+    	</complexType>
+	</element>
 
-    <element name="lastname" type="string"></element>
-
-    <element name="salary" type="string"></element>
+	<complexType name="EmployeeXSD">
+		<sequence>
+			<element name="employeeId" type="int"></element>
+			<element name="firstname" type="string"></element>
+			<element name="lastname" type="string"></element>
+		</sequence>
+	</complexType>
+	
 </schema>
