@@ -43,6 +43,7 @@ public class EmployeeSoapWS {
 			empXSD.setEmployeeId(emp.getEmployeeId());
 			empXSD.setFirstname(emp.getFirstname());
 			empXSD.setLastname(emp.getLastname());
+			empXSD.setSalary(emp.getSalary());
 		}
 		
 		response.setEmployeeXSD(empXSD);
