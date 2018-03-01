@@ -10,13 +10,13 @@ import com.tecsup.gestion.exception.DAOException;
 import com.tecsup.gestion.exception.EmptyResultException;
 import com.tecsup.gestion.model.Employee;
 import com.tecsup.gestion.services.EmployeeService;
-import com.tecsup.gestion.ws.employeeschema.EmployeeXSD;
-import com.tecsup.gestion.ws.employeeschema.GetEmployeeRequest;
-import com.tecsup.gestion.ws.employeeschema.GetEmployeeResponse;
+import com.tecsup.gestion.ws.soap.schema.EmployeeXSD;
+import com.tecsup.gestion.ws.soap.schema.GetEmployeeRequest;
+import com.tecsup.gestion.ws.soap.schema.GetEmployeeResponse;
 
 @Endpoint
 public class EmployeeSoapWS {
-	private static final String NAMESPACE_URI = "http://ws.gestion.tecsup.com/EmployeeSchema";
+	private static final String NAMESPACE_URI = "http://www.tecsup.gestion/EmployeeSchema";
   
 	@Autowired
 	private EmployeeService employeeService;
@@ -38,11 +38,13 @@ public class EmployeeSoapWS {
 		}
 		
 		EmployeeXSD empXSD = new EmployeeXSD();
- 
-		empXSD.setEmployeeId(emp.getEmployeeId());
-		empXSD.setFirstname(emp.getFirstname());
-		empXSD.setLastname(emp.getLastname());
-
+		
+		if( emp != null) {
+			empXSD.setEmployeeId(emp.getEmployeeId());
+			empXSD.setFirstname(emp.getFirstname());
+			empXSD.setLastname(emp.getLastname());
+		}
+		
 		response.setEmployeeXSD(empXSD);
 
 		return response;

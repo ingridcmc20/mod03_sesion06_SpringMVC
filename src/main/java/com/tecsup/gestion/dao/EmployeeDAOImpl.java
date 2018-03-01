@@ -119,7 +119,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		String query = "UPDATE EMPLOYEES SET password = ?, first_name =?, last_name = ?, salary = ? WHERE employee_id = ?";
 
-		Object[] params = new Object[] { emp.getPassword(), emp.getLastname(), emp.getFirstname(), emp.getSalary(), emp.getEmployeeId() };
+		Object[] params = new Object[] { emp.getPassword(), emp.getFirstname(), emp.getLastname(), emp.getSalary(), emp.getEmployeeId() };
 
 		try {
 			jdbcTemplate.update(query, params);

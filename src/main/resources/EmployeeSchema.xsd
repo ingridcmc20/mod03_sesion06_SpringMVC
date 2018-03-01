@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="http://ws.gestion.tecsup.com/EmployeeSchema"
-	xmlns:tns="http://ws.gestion.tecsup.com/EmployeeSchema" 
-	
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.tecsup.gestion/EmployeeSchema"
+	xmlns:tns="http://www.tecsup.gestion/EmployeeSchema" 
 	elementFormDefault="qualified">
 
-    <element name="getEmployeeRequest">
-    	<complexType>
-    		<sequence>
-    			<element name="employeeId" type="int" />
-    		</sequence>
-    	</complexType>
-    </element>
+    <xs:element name="getEmployeeRequest">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element name="employeeId" type="xs:int" />
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
 
-	<element name="getEmployeeResponse">
-    	<complexType>
-    		<sequence>
-    			<element name="employeeXSD" type="tns:EmployeeXSD" />
-    		</sequence>
-    	</complexType>
-	</element>
+	<xs:element name="getEmployeeResponse">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element name="employeeXSD" type="tns:EmployeeXSD" />
+    		</xs:sequence>
+    	</xs:complexType>
+	</xs:element>
 
-	<complexType name="EmployeeXSD">
-		<sequence>
-			<element name="employeeId" type="int"></element>
-			<element name="firstname" type="string"></element>
-			<element name="lastname" type="string"></element>
-		</sequence>
-	</complexType>
+	<xs:complexType name="EmployeeXSD">
+		<xs:sequence>
+			<xs:element name="employeeId" type="xs:int"/>
+			<xs:element name="firstname" type="xs:string"/>
+			<xs:element name="lastname" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
 	
-</schema>
+</xs:schema>
