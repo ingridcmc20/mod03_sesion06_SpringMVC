@@ -1,7 +1,7 @@
 package com.tecsup.gestion.model;
 
 import javax.validation.constraints.NotEmpty;
-
+ 
 public class Credential {
 
 	@NotEmpty

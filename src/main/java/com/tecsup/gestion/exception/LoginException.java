@@ -5,7 +5,7 @@ public class LoginException extends Exception {
 	public LoginException(String string) {
 		// TODO Auto-generated constructor stub
 		super(string);
-	}
+	} 
 
 	public LoginException() {
 		// TODO Auto-generated constructor stub

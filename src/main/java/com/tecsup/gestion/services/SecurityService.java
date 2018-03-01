@@ -7,6 +7,6 @@ import com.tecsup.gestion.model.Employee;
 public interface SecurityService {
 
 	
-	Employee validate(String idEmployee, String clave) throws LoginException, DAOException;
+	Employee validate( String idEmployee, String clave) throws LoginException, DAOException;
 
 }
