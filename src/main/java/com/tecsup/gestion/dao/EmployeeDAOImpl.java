@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.tecsup.gestion.exception.DAOException;
 import com.tecsup.gestion.exception.EmptyResultException;
 import com.tecsup.gestion.exception.LoginException;
+import com.tecsup.gestion.mapper.EmployeeMapper;
 import com.tecsup.gestion.model.Employee;
 
 @Repository
@@ -44,7 +45,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	
 		} catch (EmptyResultDataAccessException e) {
 			logger.info("Employee y/o clave incorrecto");
-			throw new LoginException();
+			throw new LoginException("Credential not found");
 		} catch (Exception e) {
 			logger.info("Error: " + e.getMessage());
 			throw new DAOException(e.getMessage());
@@ -65,7 +66,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return employees;
 
 		} catch (EmptyResultDataAccessException e) {
-			throw new EmptyResultException();
+			throw new EmptyResultException("Employees not found");
 		} catch (Exception e) {
 			logger.info("Error: " + e.getMessage());
 			throw new DAOException(e.getMessage());
@@ -86,6 +87,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		} catch (Exception e) {
 			//logger.error("Error: " + e.getMessage());
+			//e.printStackTrace();
 			throw new DAOException(e.getMessage());
 		}
 		
@@ -107,7 +109,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return emp;
 
 		} catch (EmptyResultDataAccessException e) {
-			throw new EmptyResultException();
+			throw new EmptyResultException("Employee not found");
 		} catch (Exception e) {
 			logger.info("Error: " + e.getMessage());
 			throw new DAOException(e.getMessage());
@@ -117,6 +119,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public void update(Employee emp) throws DAOException {
 
+		logger.info("emp >> " + emp);
+		
 		String query = "UPDATE EMPLOYEES SET password = ?, first_name =?, last_name = ?, salary = ? WHERE employee_id = ?";
 
 		Object[] params = new Object[] { emp.getPassword(), emp.getFirstname(), emp.getLastname(), emp.getSalary(), emp.getEmployeeId() };
@@ -143,6 +147,30 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			throw new DAOException(e.getMessage());
 		}
 	}
+	
+	
+	@Override
+	public Employee findByUsername(String username) throws DAOException, EmptyResultException {
+
+		String query = "SELECT employee_id, login, password, first_name, last_name, salary, department_id "
+				+ " FROM employees WHERE login = ? ";
+
+		Object[] params = new Object[] { username };
+
+		try {
+
+			Employee employee = jdbcTemplate.queryForObject(query, params, new EmployeeMapper());
+			//
+			return employee;
+
+		} catch (EmptyResultDataAccessException e) {
+			throw new EmptyResultException("Data not found");
+		} catch (Exception e) {
+			logger.info("Error: " + e.getMessage());
+			throw new DAOException(e.getMessage());
+		}
+	}
+	
 	
 	// private class Mapper
 	private class EmployeeMapper implements RowMapper<Employee> {

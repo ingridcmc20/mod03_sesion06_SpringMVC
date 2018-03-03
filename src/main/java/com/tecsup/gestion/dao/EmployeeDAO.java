@@ -21,4 +21,6 @@ public interface EmployeeDAO {
 
 	void update(Employee emp) throws DAOException;
 
+	Employee findByUsername(String username) throws DAOException, EmptyResultException;
+
 }
