@@ -17,8 +17,10 @@ import com.tecsup.gestion.model.Employee;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy({ @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml"),
-		@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml") })
+@ContextHierarchy({ 
+	@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml"),
+	@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml")
+})
 @WebAppConfiguration
 public class SecurityServiceTest {
 

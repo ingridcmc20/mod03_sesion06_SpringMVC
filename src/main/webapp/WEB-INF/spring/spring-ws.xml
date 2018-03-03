@@ -12,7 +12,7 @@
 	
 	<sws:dynamic-wsdl id="employee" 
 		portTypeName="EmployeeResource"
-		locationUri="/service/" 
+		locationUri="/ws/service/" 
 		targetNamespace="http://www.tecsup.gestion/EmployeeSchema">
 		<sws:xsd location="/WEB-INF/classes/EmployeeSchema.xsd" />
 	</sws:dynamic-wsdl>
